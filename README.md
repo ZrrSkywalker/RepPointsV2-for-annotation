@@ -15,11 +15,11 @@ We provide supported codes and configuration files to reproduce ["RepPoints V2: 
 
 ./tools/dist_test.sh ${CONFIG_FILE} ${CHECKPOINT_FILE} ${GPU_NUM} [--out ${RESULT_FILE}] [--eval ${EVAL_METRICS}]
 
-         **test脚本      配置文件         预训练模型        GPU个数        输出结果存储**
+         test脚本      配置文件         预训练模型        GPU个数        输出结果存储
          
 python -m torch.distributed.launch --nproc_per_node=$GPUS --master_port=$PORT $(dirname "$0")/test.py $CONFIG $CHECKPOINT --launcher pytorch ${@:4}
 
-                                         **GPU个数                                   运行test.py         配置文件 预训练模型**
+                                         GPU个数                                   运行test.py         配置文件 预训练模型
 
 
 
