@@ -8,19 +8,19 @@ We provide supported codes and configuration files to reproduce ["RepPoints V2: 
 
 **single-gpu testing:**
 
+```shell
  python tools/test.py ${CONFIG_FILE} ${CHECKPOINT_FILE} [--out ${RESULT_FILE}] [--eval ${EVAL_METRICS}] [--show]
-
+```
 
 **multi-gpu testing:**
 
-./tools/dist_test.sh ${CONFIG_FILE} ${CHECKPOINT_FILE} ${GPU_NUM} [--out ${RESULT_FILE}] [--eval ${EVAL_METRICS}]
+```shell
+./tools/dist_test.sh（test脚本） ${CONFIG_FILE}（配置文件） ${CHECKPOINT_FILE}（预训练模型） ${GPU_NUM}（GPU个数） [--out ${RESULT_FILE}]（输出结果存储） [--eval ${EVAL_METRICS}]
+```
 
-         test脚本      配置文件         预训练模型        GPU个数        输出结果存储
-         
-python -m torch.distributed.launch --nproc_per_node=$GPUS --master_port=$PORT $(dirname "$0")/test.py $CONFIG $CHECKPOINT --launcher pytorch ${@:4}
-
-                                         GPU个数                                   运行test.py         配置文件 预训练模型
-
+```shell
+python -m torch.distributed.launch --nproc_per_node=$GPUS（ GPU个数） --master_port=$PORT $(dirname "$0")/test.py（ 运行test.py） $CONFIG（ 配置文件） $CHECKPOINT（预训练模型） --launcher pytorch ${@:4}
+```
 
 
 ## Introduction
