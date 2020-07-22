@@ -4,6 +4,25 @@ By Yihong Chen, [Zheng Zhang](https://stupidzz.github.io/), [Yue Cao](http://yue
 
 We provide supported codes and configuration files to reproduce ["RepPoints V2: Verification Meets Regression for Object Detection"](https://arxiv.org/abs/2007.08508) on COCO object detection and instance segmentation. Besides, this repo also includes improved results for [RepPoints V1](https://arxiv.org/pdf/1904.11490.pdf), [Dense RepPoints](https://arxiv.org/pdf/1912.11473.pdf) (V1,V2). Our code is adapted from [mmdetection](https://github.com/open-mmlab/mmdetection). 
 
+## Clues
+
+**single-gpu testing:**
+
+ python tools/test.py ${CONFIG_FILE} ${CHECKPOINT_FILE} [--out ${RESULT_FILE}] [--eval ${EVAL_METRICS}] [--show]
+
+
+**multi-gpu testing:**
+
+./tools/dist_test.sh ${CONFIG_FILE} ${CHECKPOINT_FILE} ${GPU_NUM} [--out ${RESULT_FILE}] [--eval ${EVAL_METRICS}]
+
+         **test脚本      配置文件         预训练模型        GPU个数        输出结果存储**
+         
+python -m torch.distributed.launch --nproc_per_node=$GPUS --master_port=$PORT $(dirname "$0")/test.py $CONFIG $CHECKPOINT --launcher pytorch ${@:4}
+
+                                         **GPU个数                                   运行test.py         配置文件 预训练模型**
+
+
+
 ## Introduction
 
 Verification and regression are two general methodologies for prediction in neural networks. Each has its own strengths: verification can be easier to infer accurately, and regression is more efficient and applicable to continuous target variables. Hence, it is often beneficial to carefully combine them to take advantage of their benefits. We introduce verification tasks into the localization prediction of RepPoints, producing **RepPoints v2**. 
